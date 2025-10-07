@@ -1,4 +1,3 @@
-! pip install itertools
 from itertools import permutations
 
 def distance(point1, point2):
