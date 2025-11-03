@@ -105,9 +105,10 @@ Sujet à :
 # Sommets de la zone réalisable (qui est non bornée vers le haut) :
 # A = (0, 0)
 # B = (0, 1)
-# C = (
+# C = (1.33,  1.67)
+#   D   =  (2,  1)
 
-# Solution Primal : Le coût minimum de W est 
+# Solution Primal : Le coût minimum de W est de 8.
 
 # c) Formulation du problème Dual
 # On suit les règles de transformation Primal -> Dual (Min -> Max, >= -> <=, etc.)
