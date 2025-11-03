@@ -106,7 +106,8 @@ Sujet à :
 # A = (0, 0)
 # B = (0, 1)
 # C = (1.33,  1.67)
-#   D   =  (2,  1)
+# D = (2, 1)
+# E = (0, 2)
 
 # Solution Primal : Le coût minimum de W est de 8.
 
