@@ -105,44 +105,36 @@ Sujet à :
 # Sommets de la zone réalisable (qui est non bornée vers le haut) :
 # A = (0, 0)
 # B = (0, 1)
-# C = (1.6, 1.2)
+# C = (
 
-# Solution Primal : Le coût minimum de W est 19.2, atteint pour x1 = 1.6 et x2 = 1.2.
+# Solution Primal : Le coût minimum de W est 
 
 # c) Formulation du problème Dual
 # On suit les règles de transformation Primal -> Dual (Min -> Max, >= -> <=, etc.)
-Maximiser Z = 6y1 + 4y2
-Sujet à :
-  3y1 + y2 <= 6   # Coefficients de x1
-  y1 + 2y2 <= 8   # Coefficients de x2 (Erreur corrigée, c'était 8 dans l'objectif du primal, pas 4)
-  y1, y2 >= 0
 
-# d) Résolution du Dual avec Python (Pulp)
-# Ajout du code pour la traçabilité et la démonstration
-import pulp
+# d)
+from pulp import *
 
-# Création du problème de maximisation
-dual_problem = pulp.LpProblem("Dual_Problem", pulp.LpMaximize)
+model = LpProblem("Minimize Objective Function", LpMinimize)
 
-# Déclaration des variables
-y1 = pulp.LpVariable('y1', lowBound=0)
-y2 = pulp.LpVariable('y2', lowBound=0)
+x1 = LpVariable("x1", lowBound=0, cat='Continuous')
+x2 = LpVariable("x2", lowBound=0, cat='Continuous')
+x3 = LpVariable("x3", lowBound=0, cat='Continuous')
 
-# Fonction objectif
-dual_problem += 6*y1 + 4*y2, "Z"
+# Define objective function
+model += x1 + 2*x2 + 3*x3, "Objective"
 
-# Contraintes
-dual_problem += 3*y1 + y2 <= 6
-dual_problem += y1 + 2*y2 <= 8 # Corrigé ici aussi
+model += -2*x1 + x2 + x3 >= 3
+model += x1 + x3 >= 2
 
-# Résolution
-dual_problem.solve()
+model.solve()
 
-# Affichage des résultats
-# Statut: Optimal
-# Valeur optimale du Dual (Z): 19.2
-# Valeur de y1: 0.8
-# Valeur de y2: 3.6
+print("Optimal Solution:")
+print("x1 =", value(x1))
+print("x2 =", value(x2))
+print("x3 =", value(x3))
+print("Objective =", value(model.objective))
+
 
 # e) Conclusion sur la dualité
 # On observe que la valeur optimale du Primal (Min W = 19.2) est exactement égale à la valeur optimale du Dual (Max Z = 19.2).
